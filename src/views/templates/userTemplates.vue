@@ -1,6 +1,14 @@
+<script setup>
+import Header from '@/components/layout/header.vue'
+import Footer from '@/components/layout/footer.vue'
+import { RouterView } from 'vue-router'
+</script>
+
 <template>
   <!-- todo show header -->
+  <Header />
   <!-- todo show homepage -->
-  <h1 class="font-bold text-5xl flex items-center justify-center h-screen">Hei There User</h1>
+  <RouterView />
   <!-- todo show footer -->
+  <Footer />
 </template>
