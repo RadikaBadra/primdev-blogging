@@ -1,3 +1,16 @@
+<script setup>
+import Logo from '../../assets/logo.svg'
+</script>
+
 <template>
-  <div></div>
+  <div class="w-full bg-slate-700">
+    <div class="flex mx-auto px-8 py-4 justify-between w-[1080px]">
+      <router-link to="/" class="font-bold text-white"><img :src="Logo" width="50" /></router-link>
+      <nav class="flex gap-4">
+        <router-link to="/" class="text-white">Home</router-link>
+        <router-link to="/about" class="text-white">About</router-link>
+        <router-link to="/dashboard" class="text-white">Dashboard</router-link>
+      </nav>
+    </div>
+  </div>
 </template>
