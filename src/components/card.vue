@@ -18,8 +18,11 @@ const route = useRoute().name
       {{ prop.content }}
     </p>
     <div class="mt-5 flex justify-center gap-5">
-      <RouterLink v-show="route == 'author-blog'" class="btn btn-primary w-full text-center"
-        >Update</RouterLink
+      <router-link
+        to="/blog/update"
+        v-show="route == 'author-blog'"
+        class="btn btn-primary w-full text-center"
+        >Update</router-link
       >
       <button v-show="route == 'author-blog'" class="btn btn-primary w-full">Delete</button>
     </div>

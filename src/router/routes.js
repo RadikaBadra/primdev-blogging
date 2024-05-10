@@ -6,6 +6,8 @@ import About from '@/views/pages/about.vue'
 import Dashboard from '@/views/pages/author/dashboard.vue'
 import Blog from '@/views/pages/author/blog.vue'
 import CreateBlog from '@/views/pages/author/createBlog.vue'
+import UpdateBlog from '@/views/pages/author/updateBlog.vue'
+
 const routes = [
   {
     path: '/',
@@ -43,6 +45,11 @@ const routes = [
         path: '/blog/create',
         name: 'author-create-blog',
         component: CreateBlog
+      },
+      {
+        path: '/blog/update',
+        name: 'author-update-blog',
+        component: UpdateBlog
       }
     ]
   }
