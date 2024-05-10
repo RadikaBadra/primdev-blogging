@@ -3,6 +3,9 @@ import UserTemplates from '@/views/templates/userTemplates.vue'
 import Home from '@/views/pages/home.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import About from '@/views/pages/about.vue'
+import Dashboard from '@/views/pages/author/dashboard.vue'
+import Blog from '@/views/pages/author/blog.vue'
+import CreateBlog from '@/views/pages/author/createBlog.vue'
 const routes = [
   {
     path: '/',
@@ -24,7 +27,24 @@ const routes = [
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: AuthorTemplates
+    component: AuthorTemplates,
+    children: [
+      {
+        path: '/dashboard',
+        name: 'author-dashboard',
+        component: Dashboard
+      },
+      {
+        path: '/blog',
+        name: 'author-blog',
+        component: Blog
+      },
+      {
+        path: '/blog/create',
+        name: 'author-create-blog',
+        component: CreateBlog
+      }
+    ]
   }
 ]
 

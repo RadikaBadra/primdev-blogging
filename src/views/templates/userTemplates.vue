@@ -8,7 +8,9 @@ import { RouterView } from 'vue-router'
   <!-- todo show header -->
   <Header />
   <!-- todo show homepage -->
-  <RouterView />
+  <div class="bg-slate-100 h-screen p-10">
+    <RouterView />
+  </div>
   <!-- todo show footer -->
   <Footer />
 </template>
