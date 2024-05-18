@@ -10,8 +10,13 @@ const datas = ref([
 
 <template>
   <div>
-    <div v-for="(data, index) in datas" :key="index">
-      <Card :title="data.title" :content="data.content" />
+    <div class="grid grid-cols-4 gap-4 p-10">
+      <Card
+        v-for="(data, index) in datas"
+        :key="index"
+        :title="data.title"
+        :content="data.content"
+      />
     </div>
   </div>
 </template>
