@@ -1,19 +1,42 @@
 <script setup>
 import Card from '@/components/card.vue'
-import { ref } from 'vue'
+import { ref, onMounted, computed } from 'vue'
+import axios from 'axios'
+import baseUrl from '@/helper/GlobalVariable'
 
-const datas = ref([
-  { title: 'Judul 1', content: 'konten 1' },
-  { title: 'Judul 2', content: 'konten 2' },
-  { title: 'Judul 2', content: 'konten 3' },
-  { title: 'Judul 2', content: 'konten 4' }
-])
+const isLoading = ref(false)
+const blogList = ref([])
+
+const hasBlogs = computed(() => blogList.value.length > 0)
+
+const getData = async () => {
+  isLoading.value = true
+  try {
+    const response = await axios.get(baseUrl + 'blog')
+    if (response.status === 200) {
+      blogList.value = response.data
+    }
+    999
+  } catch (error) {
+    console.error('Error fetching blogs:', error)
+  } finally {
+    isLoading.value = false
+  }
+}
+
+onMounted(() => {
+  getData()
+})
 </script>
 
 <template>
-  <div class="grid grid-cols-4 gap-2">
-    <div v-for="(data, index) in datas" :key="index">
-      <Card :title="data.title" :content="data.content" />
+  <div v-if="hasBlogs" class="grid grid-cols-4 gap-4">
+    <div v-for="(data, index) in blogList" :key="index">
+      <router-link :to="'/blog/' + data.slug">
+        <Card :title="data.title" :content="data.content" />
+      </router-link>
     </div>
   </div>
+  <div v-else>No blogs found.</div>
+  <div v-if="isLoading">Loading...</div>
 </template>
