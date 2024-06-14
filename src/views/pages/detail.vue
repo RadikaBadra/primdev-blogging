@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import baseUrl from '@/helper/GlobalVariable'
+import { baseUrl } from '@/helper/GlobalVariable'
 import { useRoute } from 'vue-router'
 
 const slug = useRoute().params.slug

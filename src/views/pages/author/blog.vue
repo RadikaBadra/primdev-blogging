@@ -1,13 +1,33 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import Card from '@/components/card.vue'
+import getAuthor from '@/helper/getAuthor'
+import axios from 'axios'
+import { baseUrl, token } from '@/helper/GlobalVariable'
 
-const datas = ref([
-  { title: 'Judul 1', content: 'konten 1' },
-  { title: 'Judul 2', content: 'konten 2' },
-  { title: 'Judul 2', content: 'konten 3' },
-  { title: 'Judul 2', content: 'konten 4' }
-])
+const isLoading = ref(false)
+const blogList = ref([])
+
+const getData = async () => {
+  isLoading.value = true
+  try {
+    const author = await getAuthor()
+    const response = await axios.get(baseUrl + 'blog/author/' + author.id, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+    if (response.status === 200) {
+      blogList.value = response.data
+    }
+  } catch (error) {
+    console.error('Error fetching blogs:', error)
+  } finally {
+    isLoading.value = false
+  }
+}
+
+onMounted(() => {
+  getData()
+})
 </script>
 <template>
   <div>
@@ -16,9 +36,9 @@ const datas = ref([
       <router-link class="bg-blue-500 p-3 text-white" to="blog/create">buat blog</router-link>
     </div>
 
-    <div class="grid grid-cols-4 gap-4">
-      <div v-for="item in datas" :key="item.id">
-        <Card :title="item.title" :content="item.content" />
+    <div class="grid grid-cols-2 gap-4">
+      <div v-for="item in blogList" :key="item.id">
+        <Card :title="item.title" :content="item.content" :blog_id="item.id" />
       </div>
     </div>
   </div>

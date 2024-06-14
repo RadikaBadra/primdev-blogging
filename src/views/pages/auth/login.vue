@@ -3,7 +3,7 @@ import BaseInput from '@/components/baseInput.vue'
 import { reactive, ref } from 'vue'
 import axios from 'axios'
 import router from '@/router/routes'
-import baseUrl from '@/helper/GlobalVariable'
+import { baseUrl } from '@/helper/GlobalVariable'
 
 const input = reactive({
   email: '',
@@ -15,7 +15,7 @@ const isLoading = ref(false)
 const login = async () => {
   isLoading.value = true
   try {
-    const response = await axios.post(baseUrl + 'login', input)
+    const response = await axios.post(baseUrl + '/login', input)
     if (response.status == 200) {
       localStorage.setItem('token', response.data.token)
       router.push('/')

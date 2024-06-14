@@ -3,7 +3,7 @@ import { ref } from 'vue'
 
 const routeItem = ref([
   { name: 'Dashboard', route: '/dashboard' },
-  { name: 'blog', route: '/blog' }
+  { name: 'Blogs', route: '/blog' }
 ])
 
 const logout = () => {

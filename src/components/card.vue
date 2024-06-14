@@ -1,12 +1,36 @@
 <script setup>
+import { baseUrl, token } from '@/helper/GlobalVariable'
+import axios from 'axios'
 import { useRoute } from 'vue-router'
 
 const prop = defineProps({
   title: String,
-  content: String
+  content: String,
+  blog_id: Number
 })
 
 const route = useRoute().name
+
+const deleteBlog = async () => {
+  try {
+    const response = await axios.post(
+      baseUrl + 'blog/' + prop.blog_id,
+      {
+        _method: 'delete'
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    if (response.status === 200) {
+      location.reload()
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
 </script>
 
 <template>
@@ -24,7 +48,9 @@ const route = useRoute().name
         class="btn btn-primary w-full text-center"
         >Update</router-link
       >
-      <button v-show="route == 'author-blog'" class="btn btn-primary w-full">Delete</button>
+      <button v-show="route == 'author-blog'" class="btn btn-primary w-full" @click="deleteBlog">
+        Delete
+      </button>
     </div>
   </div>
 </template>

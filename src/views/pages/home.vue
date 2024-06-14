@@ -2,7 +2,7 @@
 import Card from '@/components/card.vue'
 import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
-import baseUrl from '@/helper/GlobalVariable'
+import { baseUrl } from '@/helper/GlobalVariable.js'
 
 const isLoading = ref(false)
 const blogList = ref([])
@@ -16,7 +16,6 @@ const getData = async () => {
     if (response.status === 200) {
       blogList.value = response.data
     }
-    999
   } catch (error) {
     console.error('Error fetching blogs:', error)
   } finally {
@@ -33,7 +32,7 @@ onMounted(() => {
   <div v-if="hasBlogs" class="grid grid-cols-4 gap-4">
     <div v-for="(data, index) in blogList" :key="index">
       <router-link :to="'/blog/' + data.slug">
-        <Card :title="data.title" :content="data.content" />
+        <Card :title="data.title" :content="data.content" :blog_id="data.id" />
       </router-link>
     </div>
   </div>
