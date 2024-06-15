@@ -32,7 +32,7 @@ onMounted(() => {
   <div v-if="hasBlogs" class="grid grid-cols-4 gap-4">
     <div v-for="(data, index) in blogList" :key="index">
       <router-link :to="'/blog/' + data.slug">
-        <Card :title="data.title" :content="data.content" :blog_id="data.id" />
+        <Card :title="data.title" :content="data.content" :blog_id="data.id" :slug="data.slug" />
       </router-link>
     </div>
   </div>

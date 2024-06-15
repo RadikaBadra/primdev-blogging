@@ -6,29 +6,26 @@ import { useRoute } from 'vue-router'
 const prop = defineProps({
   title: String,
   content: String,
-  blog_id: Number
+  blog_id: Number,
+  slug: String
 })
 
 const route = useRoute().name
 
 const deleteBlog = async () => {
-  try {
-    const response = await axios.post(
-      baseUrl + 'blog/' + prop.blog_id,
-      {
-        _method: 'delete'
-      },
-      {
+  if (confirm('Are you sure you want to delete this blog post? This action cannot be undone.')) {
+    try {
+      const response = await axios.delete(baseUrl + 'blog/' + prop.blog_id, {
         headers: {
           Authorization: `Bearer ${token}`
         }
+      })
+      if (response.status === 200) {
+        location.reload()
       }
-    )
-    if (response.status === 200) {
-      location.reload()
+    } catch (error) {
+      console.log(error)
     }
-  } catch (error) {
-    console.log(error)
   }
 }
 </script>
@@ -43,7 +40,7 @@ const deleteBlog = async () => {
     </p>
     <div class="mt-5 flex justify-center gap-5">
       <router-link
-        to="/blog/update"
+        :to="'/blog/update/' + prop.slug"
         v-show="route == 'author-blog'"
         class="btn btn-primary w-full text-center"
         >Update</router-link

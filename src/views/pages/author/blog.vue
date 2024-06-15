@@ -38,7 +38,7 @@ onMounted(() => {
 
     <div class="grid grid-cols-2 gap-4">
       <div v-for="item in blogList" :key="item.id">
-        <Card :title="item.title" :content="item.content" :blog_id="item.id" />
+        <Card :title="item.title" :content="item.content" :blog_id="item.id" :slug="item.slug" />
       </div>
     </div>
   </div>
